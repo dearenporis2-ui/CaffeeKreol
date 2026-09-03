@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,460;9..144,560;9..144,620&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,460;9..144,560;9..144,620&family=Caveat:wght@600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -450,98 +450,288 @@
     color:#4a5a52;
   }
 
-  /* ---------- MENU ---------- */
+  /* ---------- MENU: editorial layout ---------- */
+  .menu-editorial{
+    position:relative;
+  }
+  .frond{
+    position:absolute;
+    color:var(--turmeric);
+    opacity:0.22;
+    pointer-events:none;
+  }
+  .frond-a{ width:170px; top:-38px; left:-20px; transform:rotate(-18deg); }
+  .frond-b{ width:150px; bottom:-10px; right:-10px; transform:rotate(160deg); color:var(--seafoam); opacity:0.16; }
+
+  .menu-hero-row{
+    display:grid;
+    grid-template-columns:0.85fr 1.3fr 0.85fr;
+    gap:28px;
+    align-items:center;
+    margin-bottom:56px;
+  }
+  .menu-photo{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:50%;
+    border:5px solid rgba(255,255,255,0.08);
+    box-shadow:0 20px 40px rgba(4,13,11,0.4);
+  }
+  .menu-photo-b{ aspect-ratio:1/1; }
+  .menu-title-block{
+    text-align:center;
+  }
+  .menu-eyebrow-script{
+    font-family:'Caveat', cursive;
+    font-size:1.6rem;
+    color:var(--turmeric);
+    font-weight:600;
+    display:block;
+    margin-bottom:2px;
+  }
+  .menu-big-title{
+    font-size:clamp(2.6rem, 5.4vw, 4.4rem);
+    color:var(--white);
+    text-transform:uppercase;
+    letter-spacing:-0.01em;
+    line-height:0.92;
+  }
+  .menu-sub{
+    display:block;
+    margin-top:14px;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--seafoam);
+    opacity:0.7;
+  }
+
   .menu-filters{
     display:flex;
     flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:44px;
+    justify-content:center;
+    gap:10px 26px;
+    margin-bottom:60px;
+    padding-bottom:26px;
+    border-bottom:1px solid var(--line);
   }
   .filter-pill{
-    background:transparent;
-    border:1.5px solid var(--line-dark);
-    color:var(--ink);
-    padding:10px 20px;
-    border-radius:999px;
-    font-size:0.92rem;
+    background:none;
+    border:none;
+    color:var(--seafoam);
+    opacity:0.65;
+    padding:6px 2px;
+    font-size:0.82rem;
     font-weight:600;
-    transition:background .2s, color .2s, border-color .2s;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    position:relative;
+    transition:opacity .2s, color .2s;
   }
-  .filter-pill:hover{ border-color:var(--lagoon); }
+  .filter-pill::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-2px;
+    height:1.5px;
+    background:var(--turmeric);
+    transform:scaleX(0);
+    transition:transform .25s ease;
+  }
+  .filter-pill:hover{ opacity:1; }
   .filter-pill.active{
-    background:var(--lagoon);
-    border-color:var(--lagoon);
-    color:var(--white);
+    opacity:1;
+    color:var(--turmeric);
   }
-  .menu-grid{
+  .filter-pill.active::after{ transform:scaleX(1); }
+
+  .menu-columns{
     display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:20px 28px;
+    grid-template-columns:1fr 1fr;
+    gap:0 72px;
   }
-  .dish{
-    background:var(--white);
-    border-radius:16px;
-    padding:30px 32px;
+  .menu-category{
+    margin-bottom:52px;
+  }
+  .menu-columns .menu-category:nth-child(1),
+  .menu-columns .menu-category:nth-child(2){
+    grid-column:1;
+  }
+  .menu-columns .menu-category:nth-child(3),
+  .menu-columns .menu-category:nth-child(4){
+    grid-column:2;
+  }
+  .cat-head{
     display:flex;
-    flex-direction:column;
-    gap:12px;
-    border-left:3px solid var(--line-dark);
-    box-shadow:0 1px 2px rgba(7,28,23,0.04);
-    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    align-items:center;
+    gap:14px;
+    margin-bottom:22px;
   }
-  .dish:hover{
-    transform:translateY(-3px);
-    box-shadow:0 16px 32px rgba(7,28,23,0.16);
-  }
-  .dish[data-cat="creole"]{ border-left-color:var(--hibiscus); }
-  .dish[data-cat="pizza"]{ border-left-color:var(--turmeric); }
-  .dish[data-cat="cocktail"]{ border-left-color:#5FA88F; }
-  .dish[data-cat="dessert"]{ border-left-color:var(--papaya); }
-  .dish-top{
-    display:flex;
-    justify-content:space-between;
-    gap:18px;
-    align-items:flex-start;
-  }
-  .dish-top h3{
-    font-size:1.28rem;
-    font-weight:460;
-    max-width:70%;
-  }
-  .dish-price{
-    font-family:'Work Sans', sans-serif;
-    font-weight:700;
-    font-size:0.86rem;
-    color:var(--lagoon);
-    background:var(--seafoam);
-    padding:5px 13px;
-    border-radius:999px;
-    white-space:nowrap;
+  .cat-icon{
+    width:38px; height:38px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.07);
+    border:1px solid var(--line);
+    color:var(--turmeric);
+    display:flex; align-items:center; justify-content:center;
     flex-shrink:0;
   }
-  .dish p{
-    margin:0;
-    font-size:0.94rem;
-    color:#54625b;
-    line-height:1.6;
-  }
-  .dish-tag{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    font-size:0.74rem;
+  .cat-script{
+    font-family:'Caveat', cursive;
     font-weight:700;
+    font-size:2.4rem;
+    color:var(--white);
+    line-height:1;
+  }
+  .cat-list{
+    list-style:none;
+    margin:0; padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+  .item-row{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  .item-name{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:1.08rem;
+    color:var(--white);
+    white-space:nowrap;
+  }
+  .item-dots{
+    flex:1;
+    border-bottom:1.5px dotted rgba(207,232,221,0.35);
+    transform:translateY(-4px);
+  }
+  .item-price{
+    font-family:'Work Sans', sans-serif;
+    font-weight:700;
+    font-size:0.92rem;
     color:var(--turmeric);
-    text-transform:lowercase;
+    white-space:nowrap;
   }
-  .dish-tag::before{
-    content:"";
-    width:5px; height:5px;
+  .item-desc{
+    margin:5px 0 0;
+    font-size:0.86rem;
+    color:var(--seafoam);
+    opacity:0.75;
+    line-height:1.55;
+    max-width:46ch;
+  }
+  .menu-category[hidden]{ display:none; }
+
+  /* ---------- Interactive cheers glass ---------- */
+  .cat-head-cocktail{ position:relative; }
+  .cheers-glass{
+    margin-left:auto;
+    background:none;
+    border:none;
+    padding:0;
+    position:relative;
+    width:64px; height:86px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+  }
+  .cheers-hint{
+    display:block;
+    margin:-14px 0 22px;
+    font-size:0.74rem;
+    font-style:italic;
+    color:var(--seafoam);
+    opacity:0.55;
+    text-align:right;
+  }
+  .cheers-svg{
+    position:relative;
+    z-index:1;
+    animation:glassBob 4s ease-in-out infinite;
+    transform-origin:50% 100%;
+  }
+  @keyframes glassBob{
+    0%, 100%{ transform:translateY(0) rotate(0deg); }
+    50%{ transform:translateY(-3px) rotate(-1.5deg); }
+  }
+  .cheers-glow{
+    position:absolute;
+    left:50%; bottom:8px;
+    width:70px; height:70px;
+    transform:translate(-50%, 0) scale(0.6);
     border-radius:50%;
-    background:currentColor;
-    display:inline-block;
+    background:radial-gradient(circle, rgba(228,52,78,0.45), transparent 70%);
+    opacity:0;
+    pointer-events:none;
   }
-  .dish[hidden]{ display:none; }
+  .liquid{ transform-origin:50% 100%; }
+  .bubble{
+    fill:rgba(255,255,255,0.75);
+    opacity:0;
+  }
+  .ice{ transform-origin:center; }
+
+  .cheers-glass.pressed .cheers-svg{
+    animation:glassPress 0.6s cubic-bezier(.36,.07,.19,.97);
+  }
+  .cheers-glass.pressed .cheers-glow{
+    animation:glowPulse 0.7s ease-out;
+  }
+  .cheers-glass.pressed .liquid{
+    animation:liquidSlosh 0.6s ease-out;
+  }
+  .cheers-glass.pressed .ice1{
+    animation:iceJostle1 0.6s ease-out;
+  }
+  .cheers-glass.pressed .ice2{
+    animation:iceJostle2 0.6s ease-out;
+  }
+  .cheers-glass.pressed .bubble{
+    animation:bubbleRise 1s ease-out forwards;
+  }
+  .cheers-glass.pressed .bubble:nth-child(1){ animation-delay:0s; }
+  .cheers-glass.pressed .bubble:nth-child(2){ animation-delay:0.08s; }
+  .cheers-glass.pressed .bubble:nth-child(3){ animation-delay:0.15s; }
+  .cheers-glass.pressed .bubble:nth-child(4){ animation-delay:0.22s; }
+
+  @keyframes glassPress{
+    0%{ transform:scale(1) rotate(0deg); }
+    25%{ transform:scale(0.94) rotate(-9deg); }
+    50%{ transform:scale(1.03) rotate(6deg); }
+    75%{ transform:scale(0.99) rotate(-2deg); }
+    100%{ transform:scale(1) rotate(0deg); }
+  }
+  @keyframes glowPulse{
+    0%{ opacity:0; transform:translate(-50%,0) scale(0.5); }
+    35%{ opacity:0.9; transform:translate(-50%,0) scale(1.15); }
+    100%{ opacity:0; transform:translate(-50%,0) scale(1.5); }
+  }
+  @keyframes liquidSlosh{
+    0%{ transform:scaleY(1) skewX(0deg); }
+    25%{ transform:scaleY(0.85) skewX(6deg); }
+    50%{ transform:scaleY(1.08) skewX(-4deg); }
+    75%{ transform:scaleY(0.96) skewX(2deg); }
+    100%{ transform:scaleY(1) skewX(0deg); }
+  }
+  @keyframes iceJostle1{
+    0%{ transform:rotate(15deg) translate(0,0); }
+    30%{ transform:rotate(38deg) translate(-2px,-2px); }
+    60%{ transform:rotate(2deg) translate(1px,1px); }
+    100%{ transform:rotate(15deg) translate(0,0); }
+  }
+  @keyframes iceJostle2{
+    0%{ transform:rotate(-12deg) translate(0,0); }
+    30%{ transform:rotate(-30deg) translate(2px,-1px); }
+    60%{ transform:rotate(4deg) translate(-1px,1px); }
+    100%{ transform:rotate(-12deg) translate(0,0); }
+  }
+  @keyframes bubbleRise{
+    0%{ opacity:0; transform:translateY(0) scale(0.8); }
+    15%{ opacity:0.9; }
+    100%{ opacity:0; transform:translateY(-38px) scale(1.1); }
+  }
 
   /* ---------- GALLERY: scrollable depth carousel ---------- */
   .carousel-wrap{
@@ -785,7 +975,8 @@
   }
   .location-contact a:hover{ color:var(--hibiscus); }
 
-  /* ---------- FOOTER ---------- */
+  /* ---------- GALLERY TILT ---------- */
+  .car-item{ transform-style:preserve-3d; }
   footer{
     background:var(--lagoon-deep);
     color:var(--seafoam);
@@ -835,7 +1026,21 @@
     .nav-burger{ display:block; }
     .hero{ padding-top:100px; }
     .hero-actions .btn{ flex:1; justify-content:center; }
-    .menu-grid{ grid-template-columns:1fr; }
+    .menu-hero-row{ grid-template-columns:1fr; gap:20px; }
+    .menu-photo{ max-width:180px; margin:0 auto; }
+    .menu-columns{ grid-template-columns:1fr; }
+    .menu-columns .menu-category:nth-child(3),
+    .menu-columns .menu-category:nth-child(4){ grid-column:1; }
+    .frond{ display:none; }
+    .item-row{ flex-wrap:wrap; row-gap:4px; }
+    .item-name{ white-space:normal; }
+    .item-dots{ display:none; }
+    .item-price{ margin-left:auto; }
+    .story-badge{
+      position:static;
+      margin:-36px 0 0 22px;
+      max-width:210px;
+    }
     .form-row{ grid-template-columns:1fr; }
     .reserve-side, .reserve-form{ padding:36px 26px; }
     .location-info{ padding:36px 26px; }
@@ -844,6 +1049,9 @@
     .g1,.g2,.g3,.g4,.g5{ grid-column:span 1; grid-row:span 1; }
     .g1{ grid-column:span 2; grid-row:span 1; }
     .footer-links{ gap:34px; }
+    .car-item{ width:250px; height:320px; }
+    .carousel-track{ padding:10px 30px 40px 6px; gap:16px; }
+    .carousel-wrap{ margin:0 -20px; padding:0 20px; }
   }
 </style>
 </head>
@@ -877,10 +1085,11 @@
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <img class="hero-bg" id="heroBg" src="https://images.pexels.com/photos/13536336/pexels-photo-13536336.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="" aria-hidden="true">
+
   <div class="wrap hero-grid">
     <div>
       <div class="hero-eyebrow"><span class="dot"></span> Beachfront, Anse Royale, Mahé</div>
-      <h1>Toes in the sand,<br>wood-fire in the air.</h1>
+      <h1>Coastline views,<br>timeless island taste.</h1>
       <p class="hero-sub">Creole classics and wood-fired Italian, served where the terrace meets the lagoon. Fresh reef fish, homemade everything, and a sunset that shows up on time every evening.</p>
       <div class="hero-actions">
         <a href="#reserve" class="btn btn-primary">Reserve a table</a>
@@ -952,10 +1161,35 @@
 
 <!-- ============ MENU ============ -->
 <section class="section section-dark" id="menu">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>An island menu, not a laminated one.</h2>
-      <p>Filter by what you're craving. Every dish is made to order — ask your server about the day's catch and the daily special.</p>
+  <div class="wrap menu-editorial">
+
+    <svg class="frond frond-a" viewBox="0 0 200 200" fill="none">
+      <g transform="translate(100,180)">
+        <path d="M0,0 C -10,-60 -40,-110 -90,-150" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path d="M0,0 C -5,-70 -20,-130 -55,-180" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path d="M0,0 C 0,-75 0,-140 0,-195" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path d="M0,0 C 5,-70 20,-130 55,-180" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path d="M0,0 C 10,-60 40,-110 90,-150" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      </g>
+    </svg>
+    <svg class="frond frond-b" viewBox="0 0 200 200" fill="none">
+      <g transform="translate(100,180)">
+        <path d="M0,0 C -10,-60 -40,-110 -90,-150" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path d="M0,0 C -5,-70 -20,-130 -55,-180" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path d="M0,0 C 0,-75 0,-140 0,-195" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path d="M0,0 C 5,-70 20,-130 55,-180" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path d="M0,0 C 10,-60 40,-110 90,-150" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      </g>
+    </svg>
+
+    <div class="menu-hero-row">
+      <img class="menu-photo menu-photo-a" src="https://images.pexels.com/photos/1878346/pexels-photo-1878346.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Pizza baking in the wood-fired oven">
+      <div class="menu-title-block">
+        <span class="menu-eyebrow-script">Kafe Kreol</span>
+        <h2 class="menu-big-title">The<br>Menu</h2>
+        <span class="menu-sub">Creole · Wood-fired · Tropical</span>
+      </div>
+      <img class="menu-photo menu-photo-b" src="https://images.pexels.com/photos/29346150/pexels-photo-29346150.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Tropical cocktail by the beach">
     </div>
 
     <div class="menu-filters" id="filters" role="tablist" aria-label="Menu categories">
@@ -966,99 +1200,160 @@
       <button class="filter-pill" data-cat="dessert">Desserts</button>
     </div>
 
-    <div class="menu-grid" id="menuGrid">
+    <div class="menu-columns" id="menuGrid">
+
       <!-- CREOLE -->
-      <article class="dish" data-cat="creole">
-        <div class="dish-top"><h3>Kari Zourit</h3><span class="dish-price">SCR 285</span></div>
-        <p>Slow-cooked octopus curry in coconut milk and island spice, served with rice and bred (local greens).</p>
-        <span class="dish-tag">Creole specialty</span>
-      </article>
-      <article class="dish" data-cat="creole">
-        <div class="dish-top"><h3>Grilled Reef Fish</h3><span class="dish-price">SCR 320</span></div>
-        <p>Today's catch, grilled whole over embers, finished with bred masala and lime.</p>
-        <span class="dish-tag">Fresh daily</span>
-      </article>
-      <article class="dish" data-cat="creole">
-        <div class="dish-top"><h3>Fish Curry</h3><span class="dish-price">SCR 265</span></div>
-        <p>A local favorite — reef fish simmered in a citrus-lifted curry sauce with steamed rice.</p>
-        <span class="dish-tag">Signature</span>
-      </article>
-      <article class="dish" data-cat="creole">
-        <div class="dish-top"><h3>Chicken Curry Coco</h3><span class="dish-price">SCR 245</span></div>
-        <p>Bone-in chicken curry finished in coconut milk, served with rice and lentils.</p>
-        <span class="dish-tag">Creole specialty</span>
-      </article>
-      <article class="dish" data-cat="creole">
-        <div class="dish-top"><h3>Tec-Tec Soup</h3><span class="dish-price">SCR 165</span></div>
-        <p>Clam broth from the local shoreline, lightly spiced, served with warm bread.</p>
-        <span class="dish-tag">Starter</span>
-      </article>
-      <article class="dish" data-cat="creole">
-        <div class="dish-top"><h3>Pork Belly Creole</h3><span class="dish-price">SCR 295</span></div>
-        <p>Braised pork belly, tamarind glaze, sides of chatini and steamed vegetables.</p>
-        <span class="dish-tag">Creole specialty</span>
-      </article>
+      <section class="menu-category" data-cat="creole">
+        <div class="cat-head">
+          <span class="cat-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 12c0-3 3-6 8-6 4 0 6.5 3 7.5 6-1 3-3.5 6-7.5 6-5 0-8-3-8-6Z"/><path d="M6.5 12 2 9v6l4.5-3Z"/><circle cx="16" cy="10.5" r=".6" fill="currentColor" stroke="none"/></svg>
+          </span>
+          <h3 class="cat-script">Creole Specialties</h3>
+        </div>
+        <ul class="cat-list">
+          <li>
+            <div class="item-row"><span class="item-name">Kari Zourit</span><span class="item-dots"></span><span class="item-price">SCR 285</span></div>
+            <p class="item-desc">Slow-cooked octopus curry in coconut milk and island spice, served with rice and bred.</p>
+          </li>
+          <li>
+            <div class="item-row"><span class="item-name">Grilled Reef Fish</span><span class="item-dots"></span><span class="item-price">SCR 320</span></div>
+            <p class="item-desc">Today's catch, grilled whole over embers, finished with bred masala and lime.</p>
+          </li>
+          <li>
+            <div class="item-row"><span class="item-name">Fish Curry</span><span class="item-dots"></span><span class="item-price">SCR 265</span></div>
+            <p class="item-desc">Reef fish simmered in a citrus-lifted curry sauce with steamed rice.</p>
+          </li>
+          <li>
+            <div class="item-row"><span class="item-name">Chicken Curry Coco</span><span class="item-dots"></span><span class="item-price">SCR 245</span></div>
+            <p class="item-desc">Bone-in chicken curry finished in coconut milk, rice and lentils.</p>
+          </li>
+          <li>
+            <div class="item-row"><span class="item-name">Tec-Tec Soup</span><span class="item-dots"></span><span class="item-price">SCR 165</span></div>
+            <p class="item-desc">Clam broth from the local shoreline, lightly spiced, warm bread.</p>
+          </li>
+          <li>
+            <div class="item-row"><span class="item-name">Pork Belly Creole</span><span class="item-dots"></span><span class="item-price">SCR 295</span></div>
+            <p class="item-desc">Braised pork belly, tamarind glaze, chatini and steamed vegetables.</p>
+          </li>
+        </ul>
+      </section>
 
       <!-- PIZZA -->
-      <article class="dish" data-cat="pizza">
-        <div class="dish-top"><h3>Margherita</h3><span class="dish-price">SCR 210</span></div>
-        <p>San Marzano tomato, fior di latte, basil — straight from the wood oven.</p>
-        <span class="dish-tag">Wood-fired</span>
-      </article>
-      <article class="dish" data-cat="pizza">
-        <div class="dish-top"><h3>Seafood Marinara</h3><span class="dish-price">SCR 285</span></div>
-        <p>Prawns, calamari and reef fish over a garlic-tomato base, no cheese.</p>
-        <span class="dish-tag">Wood-fired</span>
-      </article>
-      <article class="dish" data-cat="pizza">
-        <div class="dish-top"><h3>Creole Chicken & Chili</h3><span class="dish-price">SCR 255</span></div>
-        <p>Spiced grilled chicken, red onion, bird's-eye chili, coriander.</p>
-        <span class="dish-tag">House favorite</span>
-      </article>
-      <article class="dish" data-cat="pizza">
-        <div class="dish-top"><h3>Quattro Formaggi</h3><span class="dish-price">SCR 260</span></div>
-        <p>Four cheeses, honey drizzle on request, finished with cracked pepper.</p>
-        <span class="dish-tag">Wood-fired</span>
-      </article>
+      <section class="menu-category" data-cat="pizza">
+        <div class="cat-head">
+          <span class="cat-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22 2 4h20L12 22Z"/><circle cx="12" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="9" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="14" r="1" fill="currentColor" stroke="none"/></svg>
+          </span>
+          <h3 class="cat-script">Wood-Fired Pizza</h3>
+        </div>
+        <ul class="cat-list">
+          <li>
+            <div class="item-row"><span class="item-name">Margherita</span><span class="item-dots"></span><span class="item-price">SCR 210</span></div>
+            <p class="item-desc">San Marzano tomato, fior di latte, basil — straight from the wood oven.</p>
+          </li>
+          <li>
+            <div class="item-row"><span class="item-name">Seafood Marinara</span><span class="item-dots"></span><span class="item-price">SCR 285</span></div>
+            <p class="item-desc">Prawns, calamari and reef fish over a garlic-tomato base, no cheese.</p>
+          </li>
+          <li>
+            <div class="item-row"><span class="item-name">Creole Chicken & Chili</span><span class="item-dots"></span><span class="item-price">SCR 255</span></div>
+            <p class="item-desc">Spiced grilled chicken, red onion, bird's-eye chili, coriander.</p>
+          </li>
+          <li>
+            <div class="item-row"><span class="item-name">Quattro Formaggi</span><span class="item-dots"></span><span class="item-price">SCR 260</span></div>
+            <p class="item-desc">Four cheeses, honey drizzle on request, cracked pepper.</p>
+          </li>
+        </ul>
+      </section>
 
       <!-- COCKTAILS -->
-      <article class="dish" data-cat="cocktail">
-        <div class="dish-top"><h3>Coco Sunset</h3><span class="dish-price">SCR 165</span></div>
-        <p>Spiced rum, fresh coconut water, passionfruit, a slow pour of grenadine.</p>
-        <span class="dish-tag">Signature</span>
-      </article>
-      <article class="dish" data-cat="cocktail">
-        <div class="dish-top"><h3>Passion Mojito</h3><span class="dish-price">SCR 150</span></div>
-        <p>White rum, muddled mint, lime, fresh passionfruit pulp.</p>
-        <span class="dish-tag">Cocktail</span>
-      </article>
-      <article class="dish" data-cat="cocktail">
-        <div class="dish-top"><h3>Island Rum Punch</h3><span class="dish-price">SCR 145</span></div>
-        <p>Local rum blend, tropical juices, a whisper of nutmeg on top.</p>
-        <span class="dish-tag">Cocktail</span>
-      </article>
-      <article class="dish" data-cat="cocktail">
-        <div class="dish-top"><h3>Citronelle Fizz</h3><span class="dish-price">SCR 130</span></div>
-        <p>Gin, lemongrass syrup, soda, citrus — light and herbal.</p>
-        <span class="dish-tag">Non-heavy</span>
-      </article>
+      <section class="menu-category" data-cat="cocktail">
+        <div class="cat-head cat-head-cocktail">
+          <span class="cat-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-8 9-8-9Z"/><path d="M12 13v7"/><path d="M8 20h8"/></svg>
+          </span>
+          <h3 class="cat-script">Cocktails</h3>
+
+          <!-- Drop your custom sound file next to this HTML file, then add a src here, e.g. src="cheers.mp3" -->
+          <audio id="cheersAudio" preload="none"></audio>
+
+          <button class="cheers-glass" id="cheersGlass" type="button" aria-label="Tap the glass to cheers">
+            <span class="cheers-glow"></span>
+            <svg class="cheers-svg" viewBox="0 0 100 140" width="58" height="80">
+              <defs>
+                <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#F0B84C"/>
+                  <stop offset="100%" stop-color="#E4344E"/>
+                </linearGradient>
+                <clipPath id="glassClip">
+                  <path d="M10 10 L90 10 L50 60 Z"/>
+                </clipPath>
+              </defs>
+              <g class="liquid-wrap" clip-path="url(#glassClip)">
+                <rect class="liquid" x="0" y="18" width="100" height="52" fill="url(#liquidGrad)"/>
+              </g>
+              <g class="bubbles">
+                <circle class="bubble" cx="38" cy="52" r="1.6"/>
+                <circle class="bubble" cx="50" cy="56" r="1.2"/>
+                <circle class="bubble" cx="60" cy="50" r="1.8"/>
+                <circle class="bubble" cx="45" cy="45" r="1.3"/>
+              </g>
+              <path d="M10 10 L90 10 L50 60 Z" fill="none" stroke="var(--white)" stroke-width="2.5" stroke-linejoin="round"/>
+              <line x1="50" y1="60" x2="50" y2="105" stroke="var(--white)" stroke-width="2.5"/>
+              <line x1="30" y1="120" x2="70" y2="120" stroke="var(--white)" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="50" y1="105" x2="50" y2="120" stroke="var(--white)" stroke-width="2.5"/>
+              <line class="straw" x1="66" y1="-4" x2="40" y2="34" stroke="var(--seafoam)" stroke-width="3" stroke-linecap="round"/>
+              <rect class="ice ice1" x="26" y="16" width="10" height="10" rx="2" fill="rgba(255,255,255,0.55)" transform="rotate(15 31 21)"/>
+              <rect class="ice ice2" x="56" y="22" width="8" height="8" rx="2" fill="rgba(255,255,255,0.4)" transform="rotate(-12 60 26)"/>
+            </svg>
+          </button>
+        </div>
+        <span class="cheers-hint">tap the glass to cheers</span>
+        <ul class="cat-list">
+          <li>
+            <div class="item-row"><span class="item-name">Coco Sunset</span><span class="item-dots"></span><span class="item-price">SCR 165</span></div>
+            <p class="item-desc">Spiced rum, fresh coconut water, passionfruit, a slow pour of grenadine.</p>
+          </li>
+          <li>
+            <div class="item-row"><span class="item-name">Passion Mojito</span><span class="item-dots"></span><span class="item-price">SCR 150</span></div>
+            <p class="item-desc">White rum, muddled mint, lime, fresh passionfruit pulp.</p>
+          </li>
+          <li>
+            <div class="item-row"><span class="item-name">Island Rum Punch</span><span class="item-dots"></span><span class="item-price">SCR 145</span></div>
+            <p class="item-desc">Local rum blend, tropical juices, a whisper of nutmeg on top.</p>
+          </li>
+          <li>
+            <div class="item-row"><span class="item-name">Citronelle Fizz</span><span class="item-dots"></span><span class="item-price">SCR 130</span></div>
+
+            <p class="item-desc">Gin, lemongrass syrup, soda, citrus — light and herbal.</p>
+          </li>
+        </ul>
+      </section>
 
       <!-- DESSERTS -->
-      <article class="dish" data-cat="dessert">
-        <div class="dish-top"><h3>Coconut Panna Cotta</h3><span class="dish-price">SCR 120</span></div>
-        <p>Set coconut cream, caramelized pineapple, toasted coconut flakes.</p>
-        <span class="dish-tag">Homemade</span>
-      </article>
-      <article class="dish" data-cat="dessert">
-        <div class="dish-top"><h3>Banana Flambé</h3><span class="dish-price">SCR 135</span></div>
-        <p>Local banana flambéed in dark rum, served warm over vanilla ice cream.</p>
-        <span class="dish-tag">Tableside</span>
-      </article>
-      <article class="dish" data-cat="dessert">
-        <div class="dish-top"><h3>Tropical Fruit Plate</h3><span class="dish-price">SCR 100</span></div>
-        <p>Whatever's ripest this week — papaya, pineapple, passionfruit, mango.</p>
-        <span class="dish-tag">Seasonal</span>
-      </article>
+      <section class="menu-category" data-cat="dessert">
+        <div class="cat-head">
+          <span class="cat-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2Z"/><path d="M12 11V7a3 3 0 0 1 3-3 2 2 0 0 1 2 2 2 2 0 0 1-2 2"/><path d="M5 15v4h14v-4"/></svg>
+          </span>
+          <h3 class="cat-script">Desserts</h3>
+        </div>
+        <ul class="cat-list">
+          <li>
+            <div class="item-row"><span class="item-name">Coconut Panna Cotta</span><span class="item-dots"></span><span class="item-price">SCR 120</span></div>
+            <p class="item-desc">Set coconut cream, caramelized pineapple, toasted coconut flakes.</p>
+          </li>
+          <li>
+            <div class="item-row"><span class="item-name">Banana Flambé</span><span class="item-dots"></span><span class="item-price">SCR 135</span></div>
+            <p class="item-desc">Local banana flambéed in dark rum, served warm over vanilla ice cream.</p>
+          </li>
+          <li>
+            <div class="item-row"><span class="item-name">Tropical Fruit Plate</span><span class="item-dots"></span><span class="item-price">SCR 100</span></div>
+            <p class="item-desc">Whatever's ripest this week — papaya, pineapple, passionfruit, mango.</p>
+          </li>
+        </ul>
+      </section>
+
     </div>
   </div>
 </section>
@@ -1280,6 +1575,7 @@
       const norm = Math.min(dist / (trackRect.width * 0.6), 1);
       const scale = 1 - norm * 0.14;
       const opacity = 1 - norm * 0.55;
+      item.dataset.scale = scale;
       item.style.transform = `scale(${scale})`;
       item.style.opacity = opacity;
     });
@@ -1347,16 +1643,88 @@
     document.body.style.overflow = '';
   }));
 
+  // ---- Interactive cheers glass: custom sound file, with synthesized fallback ----
+  let audioCtx = null;
+  function getAudioCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+
+  function playSynthClink() {
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+
+    // Two short bell-like tones for the "clink"
+    [1600, 2350].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now);
+      osc.frequency.exponentialRampToValueAtTime(freq * 0.97, now + 0.4);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.22, now + 0.008 + i * 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.55 + i * 0.02);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(now + i * 0.02);
+      osc.stop(now + 0.7);
+    });
+
+    // Short filtered noise burst for a light fizz
+    const bufferSize = Math.floor(ctx.sampleRate * 0.22);
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 2);
+    }
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+    const bandpass = ctx.createBiquadFilter();
+    bandpass.type = 'bandpass';
+    bandpass.frequency.value = 7000;
+    bandpass.Q.value = 0.6;
+    const noiseGain = ctx.createGain();
+    noiseGain.gain.setValueAtTime(0.05, now + 0.03);
+    noise.connect(bandpass).connect(noiseGain).connect(ctx.destination);
+    noise.start(now + 0.03);
+  }
+
+  // Drop your own file next to this HTML file and update the <audio id="cheersAudio"> src
+  // below (e.g. "cheers.mp3"). If the file is missing or fails to play, this falls back
+  // to the synthesized clink automatically — nothing breaks either way.
+  function playCheersSound() {
+    const audioEl = document.getElementById('cheersAudio');
+    if (audioEl && audioEl.getAttribute('src')) {
+      audioEl.currentTime = 0;
+      const playPromise = audioEl.play();
+      if (playPromise && playPromise.catch) {
+        playPromise.catch(() => playSynthClink());
+      }
+    } else {
+      playSynthClink();
+    }
+  }
+
+  const cheersGlass = document.getElementById('cheersGlass');
+  if (cheersGlass) {
+    cheersGlass.addEventListener('click', () => {
+      cheersGlass.classList.remove('pressed');
+      void cheersGlass.offsetWidth; // restart CSS animations
+      cheersGlass.classList.add('pressed');
+      try { playCheersSound(); } catch (e) { /* audio unavailable, animation still plays */ }
+    });
+  }
+
   // ---- Menu filters ----
   const filterButtons = document.querySelectorAll('.filter-pill');
-  const dishes = document.querySelectorAll('.dish');
+  const categories = document.querySelectorAll('.menu-category');
   filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       filterButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const cat = btn.dataset.cat;
-      dishes.forEach(d => {
-        d.hidden = !(cat === 'all' || d.dataset.cat === cat);
+      categories.forEach(sec => {
+        sec.hidden = !(cat === 'all' || sec.dataset.cat === cat);
       });
     });
   });
@@ -1432,6 +1800,23 @@
     confirmPanel.classList.remove('show');
     form.style.display = 'block';
   });
+
+  // ---- Gallery: subtle tilt-on-hover for depth (desktop only) ----
+  if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    items.forEach(item => {
+      item.addEventListener('mousemove', (e) => {
+        const r = item.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        const baseScale = item.dataset.scale || 1;
+        item.style.transform = `scale(${baseScale}) rotateX(${-py * 8}deg) rotateY(${px * 8}deg)`;
+      });
+      item.addEventListener('mouseleave', () => {
+        const baseScale = item.dataset.scale || 1;
+        item.style.transform = `scale(${baseScale})`;
+      });
+    });
+  }
 </script>
 
 </body>
